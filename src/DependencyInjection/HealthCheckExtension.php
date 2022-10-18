@@ -28,7 +28,7 @@ final class HealthCheckExtension extends Extension
 
         $configuration = new Configuration();
         $config        = $this->processConfiguration($configuration, $configs);
-        $container->setParameter('run_console.params', $config);
+        $container->setParameter('run_console.commands', $config['commands']);
 
         $this->init($container);
     }
@@ -37,7 +37,7 @@ final class HealthCheckExtension extends Extension
     {
         $container
             ->register('run_console.runner', ConsoleRunner::class)
-            ->setArgument('$commands', $container->getParameter('run_console.params'))
+            ->setArgument('$commands', $container->getParameter('run_console.commands'))
             ->setAutoconfigured(true)
             ->setPublic(true)
             ->setAutowired(true);
