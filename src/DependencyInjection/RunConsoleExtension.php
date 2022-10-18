@@ -8,6 +8,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use Exception;
 use Sabel\RunConsoleBundle\Controller\MainController;
 use Sabel\RunConsoleBundle\Service\ConsoleRunner;
+use Sabel\RunConsoleBundle\Service\Responder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
@@ -38,6 +39,12 @@ final class RunConsoleExtension extends Extension
         $container
             ->register('run_console.runner', ConsoleRunner::class)
             ->setArgument('$commands', $container->getParameter('run_console.commands'))
+            ->setAutoconfigured(true)
+            ->setPublic(true)
+            ->setAutowired(true);
+
+        $container
+            ->register('run_console.responder', Responder::class)
             ->setAutoconfigured(true)
             ->setPublic(true)
             ->setAutowired(true);
