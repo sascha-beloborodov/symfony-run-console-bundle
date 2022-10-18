@@ -18,14 +18,13 @@ final class MainController
     public function __construct(
         private readonly Responder $responder,
         private readonly ConsoleRunner $runner
-    )
-    {
+    ) {
     }
 
     public function __invoke(string $command): Response
     {
-        $result = $this->runner->run($command);
+        $output = $this->runner->run($command)->getOutput();
 
-        return $this->responder->response($result);
+        return $this->responder->response($output);
     }
 }

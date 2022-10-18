@@ -4,12 +4,12 @@ declare(strict_types = 1);
 
 namespace Sabel\RunConsoleBundle\DependencyInjection;
 
-use Doctrine\Persistence\ManagerRegistry;
 use Exception;
 use Sabel\RunConsoleBundle\Controller\MainController;
 use Sabel\RunConsoleBundle\Service\ConsoleRunner;
 use Sabel\RunConsoleBundle\Service\Responder;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
@@ -41,6 +41,7 @@ final class RunConsoleExtension extends Extension
             ->register('run_console.runner', ConsoleRunner::class)
             ->setArgument('$commands', $container->getParameter('run_console.commands'))
             ->setArgument('$kernel', new Reference(KernelInterface::class))
+            ->setArgument('$output', new Reference(BufferedOutput::class))
             ->setAutoconfigured(true)
             ->setPublic(true)
             ->setAutowired(true);

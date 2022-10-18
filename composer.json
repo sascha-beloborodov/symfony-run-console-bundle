@@ -19,7 +19,8 @@
     "php": "^8.1",
     "symfony/yaml": "^6.0",
     "ext-json": "*",
-    "sensio/framework-extra-bundle": "^6.1"
+    "sensio/framework-extra-bundle": "^6.1",
+    "sensiolabs/ansi-to-html": "^1.2"
   },
   "require-dev": {
     "symfony/framework-bundle": "^6.0",

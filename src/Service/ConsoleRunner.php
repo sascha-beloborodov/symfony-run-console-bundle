@@ -4,11 +4,15 @@ declare(strict_types = 1);
 
 namespace Sabel\RunConsoleBundle\Service;
 
-
-use Symfony\Component\HttpKernel\KernelInterface;
-use Symfony\Component\Console\Output\BufferedOutput;
-use Symfony\Component\Console\Input\ArrayInput;
+use DomainException;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
+use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Output\BufferedOutput;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\HttpKernel\KernelInterface;
+
+use function in_array;
+use function sprintf;
 
 final class ConsoleRunner
 {
@@ -17,9 +21,9 @@ final class ConsoleRunner
      */
     public function __construct(
         private readonly array $commands,
-        private readonly KernelInterface $kernel
-    )
-    {
+        private readonly KernelInterface $kernel,
+        private readonly BufferedOutput $output
+    ) {
     }
 
     private function getApplication(): Application
@@ -30,25 +34,29 @@ final class ConsoleRunner
         return $application;
     }
 
-    public function run(string $command): string
+    public function run(string $command): self
     {
-        if (!$this->assertCommand($command)) {
-            throw new \DomainException(sprintf('Command "%s" is unknown', $command));
+        if (!$this->checkCommand($command)) {
+            throw new DomainException(sprintf('Command "%s" is unknown', $command));
         }
 
-        $app = $this->getApplication();
+        $this->output->setVerbosity(OutputInterface::VERBOSITY_NORMAL);
+        $this->output->setDecorated(true);
 
-        $output = new BufferedOutput();
-        $app->run(new ArrayInput([
-            'command' => $command
-        ]), $output);
+        $this->getApplication()->run(new ArrayInput([
+            'command' => $command,
+        ]), $this->output);
 
-        return $output->fetch();
+        return $this;
     }
 
-    private function assertCommand(string $command): bool
+    public function getOutput(): BufferedOutput
     {
-        return in_array($command, $this->commands);
+        return $this->output;
     }
 
+    private function checkCommand(string $command): bool
+    {
+        return in_array($command, $this->commands, true);
+    }
 }
