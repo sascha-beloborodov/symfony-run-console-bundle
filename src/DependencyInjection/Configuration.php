@@ -19,6 +19,7 @@ final class Configuration implements ConfigurationInterface
             ->arrayNode('commands')
             ->scalarPrototype()
             ->end()
+            ->end()
             ->end();
 
         return $treeBuilder;
