@@ -17,8 +17,7 @@ final class Configuration implements ConfigurationInterface
             ->getRootNode()
             ->children()
             ->arrayNode('commands')
-            ->scalarPrototype()
-            ->end()
+            ->scalarPrototype()->end()
             ->end()
             ->end();
 
