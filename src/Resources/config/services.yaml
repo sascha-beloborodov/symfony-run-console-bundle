@@ -1,0 +1,12 @@
+services:
+  Sabel\RunConsoleBundle\Controller\MainController:
+    alias: 'run_console.controller'
+    public: true
+
+  Sabel\RunConsoleBundle\Service\ConsoleRunner:
+    alias: 'run_console.runner'
+    public: true
+
+  Sabel\RunConsoleBundle\Service\Responder:
+    alias: 'run_console.responder'
+    public: true

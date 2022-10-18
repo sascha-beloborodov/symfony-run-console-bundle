@@ -1,0 +1,30 @@
+{
+  "name": "sascha-beloborodov/symfony-run-console-bundle",
+  "license": "MIT",
+  "type": "symfony-bundle",
+  "description": "Run console command via http",
+  "autoload": {
+    "psr-4": {
+      "Sabel\\RunConsoleBundle\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Sabel\\RunConsoleBundle\\Tests\\": "tests/"
+    }
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true,
+  "require": {
+    "php": "^8.1",
+    "symfony/yaml": "^6.0",
+    "ext-json": "*",
+    "sensio/framework-extra-bundle": "^6.1"
+  },
+  "require-dev": {
+    "symfony/framework-bundle": "^6.0",
+    "phpunit/phpunit": "^9.5",
+    "friendsofphp/php-cs-fixer": "^3.0",
+    "phpstan/phpstan": "^1.0"
+  }
+}
