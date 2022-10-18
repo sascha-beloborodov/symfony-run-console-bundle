@@ -14,7 +14,7 @@ use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
-final class HealthCheckExtension extends Extension
+final class RunConsoleExtension extends Extension
 {
     /**
      * @param array<string, mixed> $configs

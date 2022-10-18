@@ -9,9 +9,6 @@ use Sabel\RunConsoleBundle\Service\Responder;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/healthz", methods={"GET"})
- */
 #[Route(
     path: '/run-console/{command}',
     methods: ['GET']
