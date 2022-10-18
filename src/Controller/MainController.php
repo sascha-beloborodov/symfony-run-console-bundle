@@ -6,7 +6,7 @@ namespace Sabel\RunConsoleBundle\Controller;
 
 use Sabel\RunConsoleBundle\Service\ConsoleRunner;
 use Sabel\RunConsoleBundle\Service\Responder;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route(
@@ -15,17 +15,17 @@ use Symfony\Component\Routing\Annotation\Route;
 )]
 final class MainController
 {
-    public function __invoke(string $command): JsonResponse
-    {
-        $this->runner->run($command);
-
-        return $this->responder->response();
-    }
-
     public function __construct(
         private readonly Responder $responder,
         private readonly ConsoleRunner $runner
     )
     {
+    }
+
+    public function __invoke(string $command): Response
+    {
+        $result = $this->runner->run($command);
+
+        return $this->responder->response($result);
     }
 }

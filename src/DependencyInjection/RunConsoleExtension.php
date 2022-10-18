@@ -14,6 +14,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 final class RunConsoleExtension extends Extension
 {
@@ -39,6 +40,7 @@ final class RunConsoleExtension extends Extension
         $container
             ->register('run_console.runner', ConsoleRunner::class)
             ->setArgument('$commands', $container->getParameter('run_console.commands'))
+            ->setArgument('$kernel', new Reference(KernelInterface::class))
             ->setAutoconfigured(true)
             ->setPublic(true)
             ->setAutowired(true);

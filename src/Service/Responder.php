@@ -4,13 +4,12 @@ declare(strict_types = 1);
 
 namespace Sabel\RunConsoleBundle\Service;
 
-
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 final class Responder
 {
-    public function response(): JsonResponse
+    public function response(string $content): Response
     {
-        return new JsonResponse();
+        return new Response($content);
     }
 }
